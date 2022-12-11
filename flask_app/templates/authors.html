@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Authors</title>
+</head>
+<body>
+    <div class="flex">
+        <div class="column">
+            <h1>New Author</h1>
+            <form action="/create/author", method="post">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name">
+                <input class="button" type="submit" value="Create">
+            </form>
+        </div>
+        <div class="column">
+            <h1>All Authors</h1>
+            <div class="list">
+                {% for author in authors %}
+                    <h3><a class="dojoList" href="/authors/{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</a></h3>
+                {% endfor %}
+            </div>
+            <p><a href="/books">Add Book</a></p>
+        </div>
+    </div>
+</body>
+</html>

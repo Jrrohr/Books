@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Show Author</title>
+</head>
+<body>
+    <div class="column">
+        <h1>Title: {{ book.title }}</h1>
+        <div class="single flex">
+            <div>
+                <h3>Favorited by:</h3>
+                <ul>
+                    {% for author in book.favorited %}
+                        <li>{{ author.first_name }} {{ author.last_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div>
+                <h2>Add Book's Favorites</h2>
+                <form action="/add/author" method="post">
+                    <input type="hidden" name="book_id" value="{{ book.id }}">
+                    <label for="author_id">Author:</label>
+                    <select name="author_id">
+                        <!-- Need to create an option list for the user to select a restaurant. -->
+                        <!-- Note that we are passing the restaurant id into the value -->
+                        {% for author in authors %}
+                            <option value={{ author.id }}>{{ author.first_name }} {{ author.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="button" type="submit" value="Create">
+                </form>
+                <p><a href="/authors">Home</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
